@@ -4,7 +4,7 @@ import numpy as np
 import random
 #прочитали таблицу со словами
 #Она должна быть в формате xls excel 1997-2003
-df_words = pd.read_excel('bd_words.xls')
+df_words = pd.read_excel('bd_words.csv')
 #добавляем к словам "сложность". Напоминаю, первые по частотности 25% - легкие
 # последние 25% - сложные
 diffs = []
@@ -20,20 +20,7 @@ diffs = []
 #Это словарь с логинами паролями))
 mydict = {'Клиника памяти':1, 'Организация Вторая':2, 's':3}
 
-def createlist2(how_many):
-    id_words = random.sample(df_words['ID'].tolist(), int(how_many))
-    pdf = FPDF()
-    pdf.add_page()
-    pdf.add_font('DejaVu', '', 'DejaVuSansCondensed.ttf', uni=True)
-    pdf.set_font('DejaVu', '', 14)
-    text = ''
 
-    for id in id_words:
-        pdf.cell(200, 10, txt=str(df_words[df_words['ID']==id]['Определение'].tolist()[0]), ln =2, align="L")
-        #text = text + str(df_words[df_words['ID']==id]['Определение'].tolist()[0]) + '\n\n\n'
-    pdf.cell(200, 10, txt=text, align="L")
-    print(len(id_words))
-    pdf.output("simple_demo.pdf")
 
 
 #Все, что начинается с st имеет отношение к стримлиту
@@ -48,7 +35,7 @@ if str(mydict[login]) == password:
     version = st.selectbox('Настройки', ('Простые', 'Сложные'))
     if version == 'Простые':  #сложные пока не делаем
         #читаем базу данных пациентов
-        df1 = pd.read_excel('bd_clinic.xls')
+        df1 = pd.read_excel('bd_clinic.csv')
         #Берем только клинику из логина, берем так хитро,
         #кладя в новый датафрейм, чтобы нумерация строк была с 0 по порядку
         df_clinic = pd.DataFrame(df1[df1['Клиника']==login].values, columns=df1.columns)
