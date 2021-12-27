@@ -4,7 +4,7 @@ import numpy as np
 import random
 #прочитали таблицу со словами
 #Она должна быть в формате xls excel 1997-2003
-df_words = pd.read_excel('bd_words.csv')
+df_words = pd.read_csv('bd_words.csv')
 #добавляем к словам "сложность". Напоминаю, первые по частотности 25% - легкие
 # последние 25% - сложные
 diffs = []
@@ -35,7 +35,7 @@ if str(mydict[login]) == password:
     version = st.selectbox('Настройки', ('Простые', 'Сложные'))
     if version == 'Простые':  #сложные пока не делаем
         #читаем базу данных пациентов
-        df1 = pd.read_excel('bd_clinic.csv')
+        df1 = pd.read_csv('bd_clinic.csv')
         #Берем только клинику из логина, берем так хитро,
         #кладя в новый датафрейм, чтобы нумерация строк была с 0 по порядку
         df_clinic = pd.DataFrame(df1[df1['Клиника']==login].values, columns=df1.columns)
