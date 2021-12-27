@@ -2,10 +2,9 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import random
-from fpdf import FPDF
 #прочитали таблицу со словами
 #Она должна быть в формате xls excel 1997-2003
-df_words = pd.read_excel('C:/Users/SKudr/PycharmProjects/Masterskaya/bd_words.xls')
+df_words = pd.read_excel('bd_words.xls')
 #добавляем к словам "сложность". Напоминаю, первые по частотности 25% - легкие
 # последние 25% - сложные
 diffs = []
@@ -49,7 +48,7 @@ if str(mydict[login]) == password:
     version = st.selectbox('Настройки', ('Простые', 'Сложные'))
     if version == 'Простые':  #сложные пока не делаем
         #читаем базу данных пациентов
-        df1 = pd.read_excel('C:/Users/SKudr/PycharmProjects/Masterskaya/bd_clinic.xls')
+        df1 = pd.read_excel('bd_clinic.xls')
         #Берем только клинику из логина, берем так хитро,
         #кладя в новый датафрейм, чтобы нумерация строк была с 0 по порядку
         df_clinic = pd.DataFrame(df1[df1['Клиника']==login].values, columns=df1.columns)
@@ -95,7 +94,10 @@ if str(mydict[login]) == password:
                                      file_name = 'simple_demo.pdf',
                                      mime = 'pdf')
     if version == 'Сложные':
-        st.write('В разработке')
+        st.write('### Full Dataset', df_words)
+        selected_indices = st.multiselect('Select rows:', df_words.index)
+        selected_rows = df_words.loc[selected_indices]
+        st.write('### Selected Rows', selected_rows)
 
 
 def createlist(id_patient, which, how_many, how_difficult):
