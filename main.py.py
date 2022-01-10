@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import random
+import os
 #прочитали таблицу со словами
 #Она должна быть в формате xls excel 1997-2003
 df_words = pd.read_csv('bd_words.csv')
@@ -23,7 +24,6 @@ mydict = {'Клиника памяти':1, 'Организация Вторая'
 with open('test.txt', 'w', encoding = 'UTF-8') as f:
     f.write('hello world')
 
-
 #Все, что начинается с st имеет отношение к стримлиту
 st.title('Составитель списка определений для тренировки в Клинике памяти')
 st.write('Авторизуйтесь, пожалуйста')
@@ -31,6 +31,7 @@ st.write('Авторизуйтесь, пожалуйста')
 login = st.text_input('Логин')
 password = st.text_input('Пароль')
 
+st.write(str(os.getcwd()))
 if str(mydict[login]) == password:
     st.write('Составить список слов')
     version = st.selectbox('Настройки', ('Простые', 'Сложные'))
