@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import random
 
-df_words = pd.read_csv('C:/Users/SKudr/PycharmProjects/Masterskaya/bd_words.csv')
+df_words = pd.read_csv('bd_words.csv')
 
 st.title('Составитель списка определений для тренировки в Клинике памяти')
 
